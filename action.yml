@@ -50,12 +50,19 @@ runs:
 
         DEST="$RUNNER_TEMP/yampl"
         URL="$(jq -r --arg OS "$OS" \
-          '.assets[] | select(.name | ascii_downcase | test($OS + "_(amd64|x86_64).tar.gz$")) | .url' \
+          '.assets[] | select(.name | ascii_downcase | test($OS + "_(amd64|x86_64).(tar.gz|zip)$")) | .url' \
           <<<"$RELEASE" \
         )"
 
         echo "Downloading $URL"
         mkdir -p "$DEST"
-        curl -sfL "$URL" \
-          | tar -xzf - -C "$DEST" "$FILENAME"
+        if [[ "$URL" == *.tar.gz ]]; then
+          curl -sfL "$URL" \
+            | tar -xzf - -C "$DEST" "$FILENAME"
+        elif [[ "$URL" == *.zip ]]; then
+          curl -sfL -o yampl.zip "$URL"
+          unzip yampl.zip "$FILENAME"
+          mv "$FILENAME" "$DEST"
+          rm yampl.zip
+        fi
         echo "$DEST" >>$GITHUB_PATH
