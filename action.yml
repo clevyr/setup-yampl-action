@@ -1,0 +1,38 @@
+name: Setup Yampl
+description: GitHub Action to install yampl during CI/CD.
+inputs:
+  token:
+    description: GitHub token
+    default: ${{ github.token }}
+  version:
+    description: The version of yampl to install
+    # renovate datasource=github-releases depName=clevyr/yampl
+    default: "v0.3.9"
+outputs:
+  version:
+    description: The version of yampl that was installed
+    value: ${{ steps.version.install.version }}
+runs:
+  using: composite
+  steps:
+    - id: install
+      name: Install Yampl
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+      run: |
+        set -euo pipefail
+
+        echo "Installing yampl ${{ inputs.version }}..."
+
+        RELEASE="$(gh release view --repo=clevyr/yampl --json=name,assets "${{ inputs.version }}")"
+        echo "version=$(yq '.name' <<<"$RELEASE")" >>$GITHUB_OUTPUT
+
+        DEST="$RUNNER_TEMP/yampl"
+        URL="$(yq '.assets[] | select(.name | downcase | test("linux_(amd64|x86_64).tar.gz$")) | .url' <<<"$RELEASE")"
+
+        echo "Downloading $URL"
+        mkdir -p "$DEST"
+        curl -sfL "$URL" \
+          | tar -xzf - -C "$DEST" yampl
+        echo "$DEST" >>$GITHUB_PATH
