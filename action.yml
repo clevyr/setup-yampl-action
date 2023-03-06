@@ -30,18 +30,23 @@ runs:
 
         case "${{ runner.os }}" in
           Linux)
-            export OS=linux ;;
+            OS=linux ;;
           macOS)
-            export OS=darwin ;;
+            OS=darwin ;;
+          Windows)
+            OS=windows ;;
         esac
 
         RELEASE="$(gh release view --repo=clevyr/yampl --json=name,assets $VERSION)"
-        VERSION="$(yq '.name' <<<"$RELEASE")"
+        VERSION="$(jq -r '.name' <<<"$RELEASE")"
         echo "version=$VERSION" >>$GITHUB_OUTPUT
         echo "Installing yampl $VERSION..."
 
         DEST="$RUNNER_TEMP/yampl"
-        URL="$(yq '.assets[] | select(.name | downcase | test(strenv(OS) + "_(amd64|x86_64).tar.gz$")) | .url' <<<"$RELEASE")"
+        URL="$(jq -r --arg OS "$OS" \
+          '.assets[] | select(.name | ascii_downcase | test($OS + "_(amd64|x86_64).tar.gz$")) | .url' \
+          <<<"$RELEASE" \
+        )"
 
         echo "Downloading $URL"
         mkdir -p "$DEST"
