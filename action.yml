@@ -20,13 +20,18 @@ runs:
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.token }}
+        VERSION: ${{ inputs.version }}
       run: |
         set -euo pipefail
 
-        echo "Installing yampl ${{ inputs.version }}..."
+        if [[ "$VERSION" == latest ]]; then
+          VERSION=
+        fi
 
-        RELEASE="$(gh release view --repo=clevyr/yampl --json=name,assets "${{ inputs.version }}")"
-        echo "version=$(yq '.name' <<<"$RELEASE")" >>$GITHUB_OUTPUT
+        RELEASE="$(gh release view --repo=clevyr/yampl --json=name,assets $VERSION)"
+        VERSION="$(yq '.name' <<<"$RELEASE")"
+        echo "version=$VERSION" >>$GITHUB_OUTPUT
+        echo "Installing yampl "$VERSION"..."
 
         DEST="$RUNNER_TEMP/yampl"
         URL="$(yq '.assets[] | select(.name | downcase | test("linux_(amd64|x86_64).tar.gz$")) | .url' <<<"$RELEASE")"
