@@ -1,0 +1,23 @@
+name: Test
+
+on: push
+
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        version: [v0.3.8, v0.3.9]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          version: ${{ matrix.version }}
+      - name: Yampl exists
+        shell: bash
+        run: command -v yampl
+      - name: Yampl runs
+        shell: bash
+        run: yampl --version
