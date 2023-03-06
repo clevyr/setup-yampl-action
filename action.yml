@@ -30,11 +30,17 @@ runs:
 
         case "${{ runner.os }}" in
           Linux)
-            OS=linux ;;
+            OS=linux
+            FILENAME=yampl
+            ;;
           macOS)
-            OS=darwin ;;
+            OS=darwin
+            FILENAME=yampl
+            ;;
           Windows)
-            OS=windows ;;
+            OS=windows
+            FILENAME=yampl.exe
+            ;;
         esac
 
         RELEASE="$(gh release view --repo=clevyr/yampl --json=name,assets $VERSION)"
@@ -51,5 +57,5 @@ runs:
         echo "Downloading $URL"
         mkdir -p "$DEST"
         curl -sfL "$URL" \
-          | tar -xzf - -C "$DEST" yampl
+          | tar -xzf - -C "$DEST" "$FILENAME"
         echo "$DEST" >>$GITHUB_PATH
