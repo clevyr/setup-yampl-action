@@ -31,7 +31,7 @@ runs:
         RELEASE="$(gh release view --repo=clevyr/yampl --json=name,assets $VERSION)"
         VERSION="$(yq '.name' <<<"$RELEASE")"
         echo "version=$VERSION" >>$GITHUB_OUTPUT
-        echo "Installing yampl "$VERSION"..."
+        echo "Installing yampl $VERSION..."
 
         DEST="$RUNNER_TEMP/yampl"
         URL="$(yq '.assets[] | select(.name | downcase | test("linux_(amd64|x86_64).tar.gz$")) | .url' <<<"$RELEASE")"
