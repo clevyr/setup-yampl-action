@@ -7,7 +7,7 @@ inputs:
   version:
     description: The version of yampl to install
     # renovate datasource=github-releases depName=clevyr/yampl
-    default: "v0.3.9"
+    default: "v0.3.10"
 outputs:
   version:
     description: The version of yampl that was installed
