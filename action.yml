@@ -6,8 +6,7 @@ inputs:
     default: ${{ github.token }}
   version:
     description: The version of yampl to install
-    # renovate datasource=github-releases depName=clevyr/yampl
-    default: "v0.3.10"
+    default: latest
 outputs:
   version:
     description: The version of yampl that was installed
