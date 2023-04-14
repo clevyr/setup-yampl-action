@@ -7,13 +7,16 @@ See the [yampl](https://github.com/clevyr/yampl#readme) readme for more details 
 # Usage
 
 ## Inputs
-
-- `version` - The version of yampl to install.
-- `token` - GitHub token.
+| Name      | Description                  | Required | Default               |
+|-----------|------------------------------|----------|-----------------------|
+| `version` | The Yampl version to install | `false`  | `latest`              |
+| `token`   | GitHub Token                 | `false`  | `${{ github.token }}` |
 
 ## Outputs
 
-- `version` - The version of yampl that was installed.
+| Name      | Description                          |
+|-----------|--------------------------------------|
+| `version` | The Yampl version that was installed |
 
 ## Example Workflow
 
