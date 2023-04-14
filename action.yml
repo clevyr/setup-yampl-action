@@ -1,15 +1,15 @@
 name: Setup Yampl
-description: GitHub Action to install yampl during CI/CD.
+description: GitHub Action to install Yampl during CI/CD.
 inputs:
   token:
     description: GitHub token
     default: ${{ github.token }}
   version:
-    description: The version of yampl to install
+    description: The Yampl version to install
     default: latest
 outputs:
   version:
-    description: The version of yampl that was installed
+    description: The Yampl version that was installed
     value: ${{ steps.version.install.version }}
 runs:
   using: composite

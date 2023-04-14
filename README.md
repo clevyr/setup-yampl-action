@@ -1,6 +1,5 @@
-# setup-yampl-action
-
-This action installs [yampl](https://github.com/clevyr/yampl).
+# Setup Yampl Action
+This action installs [clevyr/yampl](https://github.com/clevyr/yampl).
 
 See the [yampl](https://github.com/clevyr/yampl#readme) readme for more details on yampl templating capabilities.
 
@@ -19,7 +18,6 @@ See the [yampl](https://github.com/clevyr/yampl#readme) readme for more details 
 | `version` | The Yampl version that was installed |
 
 ## Example Workflow
-
 Here is an example that fetches a separate deployment repo and patches its configuration.
 
 ```yaml
