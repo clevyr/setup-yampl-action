@@ -15,9 +15,9 @@ jobs:
       - uses: ./
         with:
           version: ${{ matrix.version }}
-      - name: Yampl exists
+      - name: Binary exists
         shell: bash
         run: command -v yampl
-      - name: Yampl runs
+      - name: Binary runs
         shell: bash
         run: yampl --version
