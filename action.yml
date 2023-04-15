@@ -10,7 +10,7 @@ inputs:
 outputs:
   version:
     description: The Yampl version that was installed
-    value: ${{ steps.version.install.version }}
+    value: ${{ steps.install.outputs.version }}
 runs:
   using: composite
   steps:
