@@ -3,15 +3,15 @@ This action installs [clevyr/yampl](https://github.com/clevyr/yampl).
 
 See the [yampl](https://github.com/clevyr/yampl#readme) readme for more details on yampl templating capabilities.
 
-# Usage
+## Usage
 
-## Inputs
+### Inputs
 | Name      | Description                  | Required | Default               |
 |-----------|------------------------------|----------|-----------------------|
 | `version` | The Yampl version to install | `false`  | `latest`              |
 | `token`   | GitHub Token                 | `false`  | `${{ github.token }}` |
 
-## Outputs
+### Outputs
 
 | Name      | Description                          |
 |-----------|--------------------------------------|
