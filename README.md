@@ -6,10 +6,11 @@ See the [yampl](https://github.com/clevyr/yampl#readme) readme for more details 
 ## Usage
 
 ### Inputs
-| Name      | Description                  | Required | Default               |
-|-----------|------------------------------|----------|-----------------------|
-| `version` | The Yampl version to install | `false`  | `latest`              |
-| `token`   | GitHub Token                 | `false`  | `${{ github.token }}` |
+| Name      | Description                  | Required | Default                                           |
+|-----------|------------------------------|----------|---------------------------------------------------|
+| `version` | The Yampl version to install | `false`  | `latest`                                          |
+| `repo`    | The Yampl repo to use        | `false`  | [`clevyr/yampl`](https://github.com/clevyr/yampl) |
+| `token`   | GitHub Token                 | `false`  | `${{ github.token }}`                             |
 
 ### Outputs
 

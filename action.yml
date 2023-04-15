@@ -1,6 +1,9 @@
 name: Setup Yampl
 description: GitHub Action to install Yampl during CI/CD.
 inputs:
+  repo:
+    description: The Yampl repo to use
+    default: clevyr/yampl
   token:
     description: GitHub token
     default: ${{ github.token }}
@@ -19,6 +22,7 @@ runs:
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.token }}
+        GH_REPO: ${{ inputs.repo }}
         VERSION: ${{ inputs.version }}
       run: |
         set -euo pipefail
@@ -42,7 +46,7 @@ runs:
             ;;
         esac
 
-        RELEASE="$(gh release view --repo=clevyr/yampl --json=name,assets $VERSION)"
+        RELEASE="$(gh release view --json=name,assets $VERSION)"
         VERSION="$(jq -r '.name' <<<"$RELEASE")"
         echo "version=$VERSION" >>$GITHUB_OUTPUT
         echo "Installing yampl $VERSION..."
