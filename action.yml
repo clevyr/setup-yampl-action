@@ -60,9 +60,9 @@ runs:
           curl -sfL "$URL" \
             | tar -xzf - "$FILENAME"
         elif [[ "$URL" == *.zip ]]; then
-          curl -sfL -o yampl.zip "$URL"
-          unzip yampl.zip "$FILENAME"
+          curl -sfL -o app.zip "$URL"
+          unzip app.zip "$FILENAME"
           mv "$FILENAME" "$DEST"
-          rm yampl.zip
+          rm app.zip
         fi
         echo "$DEST" >>$GITHUB_PATH
