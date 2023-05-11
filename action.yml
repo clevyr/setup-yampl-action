@@ -1,5 +1,8 @@
 name: Setup Yampl
 description: GitHub Action to install Yampl during CI/CD.
+branding:
+  color: orange
+  icon: download
 inputs:
   repo:
     description: The Yampl repo to use
