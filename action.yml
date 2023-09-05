@@ -69,7 +69,6 @@ runs:
           *.zip)
             curl -sfL -o app.zip "$URL"
             unzip app.zip "$FILENAME"
-            mv "$FILENAME" "$DEST"
             rm app.zip
             ;;
           *)
