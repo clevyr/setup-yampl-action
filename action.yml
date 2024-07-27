@@ -68,7 +68,7 @@ runs:
             curl -sfL "$URL" | tar -xzf - "$FILENAME";;
           *.zip)
             curl -sfL -o app.zip "$URL"
-            unzip app.zip "$FILENAME"
+            unzip -o app.zip "$FILENAME"
             rm app.zip
             ;;
           *)
