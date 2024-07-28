@@ -2,5 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>clevyr/renovate-config-public"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [".github/workflows/test.yaml"],
+      "matchStrings": ["version:\\n +- (?<currentValue>.*)\n"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "clevyr/yampl"
+    }
   ]
 }
